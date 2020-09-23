@@ -1,0 +1,27 @@
+{
+  "name": "game-roller",
+  "version": "1.0.0",
+  "description": "Discord Bot for distributing gaming roles based on members interest",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaniloMurer/game-roller.git"
+  },
+  "keywords": [
+    "discordbot",
+    "nodejs"
+  ],
+  "author": "Danilo Jakob",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/DaniloMurer/game-roller/issues"
+  },
+  "homepage": "https://github.com/DaniloMurer/game-roller#readme",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
+}
