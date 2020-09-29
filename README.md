@@ -7,12 +7,18 @@ The normal server members can use follwing commands:
 
 - join `%game join GAME_NAME` join a game
 - leave `%game leave GAME_NAME` leave a game
+- list `%game list` show supported games
 
 After joining a game, the respective channels should be visible/accessible for the members.
 
 After leaving a game, the respective channels shoud be hidden/not accessible
 
+With the list command a member can see which games are available at the moment:
+
+![embed-logo](assets/SNAG-0908.png)
+
 <b>Those commands do only work when the server has those roles created</b>.
+
 
 ## Admins: How to use it?
 
