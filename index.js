@@ -9,10 +9,9 @@ client.on('message', (message) => {
     if (message.content.startsWith(config.commandPrefix)) {
         
         const strippedCommand = message.content.slice(config.commandPrefix.length);
-        console.log(strippedCommand);
         
         // Check if the user wants to join a game
-        if (strippedCommand.split(' ')[1] === 'add') {
+        if (strippedCommand.split(' ')[1] === 'join') {
             // Get the game name
             const gameName = strippedCommand.split(' ')[2].toLowerCase();
 
@@ -25,7 +24,7 @@ client.on('message', (message) => {
             } else {
                 message.reply('This game is not supported by the server yet!');
             }
-        } else if (strippedCommand.split(' ')[1] === 'remove') {
+        } else if (strippedCommand.split(' ')[1] === 'leave') {
             // Get the game name
             const gameName = strippedCommand.split(' ')[2].toLowerCase();
             
@@ -36,7 +35,35 @@ client.on('message', (message) => {
                 user.roles.remove(role);
                 message.reply('You were removed from the game, the channels are not visible anymore :(');
             } else {
-                message.reply('This game is not supported by the server yet!');
+                message.reply('This game is not supported by the server yet! Contact the mods.');
+            }
+        } else if (strippedCommand.split(' ')[1] === 'add') {
+            const user = message.guild.member(message.author);
+
+            if (user.hasPermission('ADMINISTRATOR')) {
+                message.guild.roles.create({
+                    data: {
+                        name: strippedCommand.split(' ')[2].toLowerCase()
+                    }
+                });
+                message.reply(`New game role: ${strippedCommand.split(' ')[2].toLowerCase()} was added to the server!`)   
+            } else {
+                message.reply('You don\'t have the permission to create new game roles! Contact the mods.')
+            }
+        } else if (strippedCommand.split(' ')[1] === 'remove') {
+            const user = message.guild.member(message.author);
+
+            if (user.hasPermission('ADMINISTRATOR')) {
+                const roleName = strippedCommand.split(' ')[2].toLowerCase();
+                const roleToDelete = message.guild.roles.cache.find(role => role.name === roleName);
+
+                if (roleToDelete.delete()) {
+                    message.reply(`Role: ${roleName} was successfully removed!`);
+                } else {
+                    message.reply(`Error while deleting the role: ${roleName}! Contact the developer`);
+                }
+            } else {
+                message.reply('You don\'t have the permission to create new game roles! Contact the mods.')
             }
         }
     }
