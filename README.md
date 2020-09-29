@@ -21,6 +21,6 @@ The administrators of the server can use the "Member" commands but also can you 
 - add `%game add GAME_NAME`
 - remove `%game remove GAME_NAME`
 
-After adding a game, the game is accessible for the members. The permission for the channel tho need to be created manually.
+After adding a game, the game is accessible for the members. The channels are created automatically and the permissions are being applied.
 
-After removing a game, the game is not accessible anymore. The channels need to be deleted.
+After removing a game, the game is not accessible anymore. The channels and the roles are going to be deleted.
