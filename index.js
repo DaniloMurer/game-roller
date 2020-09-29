@@ -124,6 +124,19 @@ client.on('message', (message) => {
             } else {
                 message.reply('You don\'t have the permission to create new game roles! Contact the mods.')
             }
+        } else if (strippedCommand.split(' ')[1] === 'list') {
+            let voiceChannels = [];
+            voiceChannels = message.guild.channels.cache.filter(channel => channel.parentID == '757603920850845797' && channel.type == 'text');
+            const embedInfo = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle('Game List')
+                .setAuthor('Game Roller', 'https://cdn.discordapp.com/attachments/714585796287660103/760490581314633748/a.jpg')
+                .setDescription('Available Games');
+
+            voiceChannels.forEach(element => {
+                embedInfo.addField('Game', element.name, false);
+            });
+            message.reply(embedInfo);
         }
     }
 });
