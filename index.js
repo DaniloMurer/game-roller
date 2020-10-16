@@ -39,6 +39,7 @@ client.on('message', (message) => {
             }
         } else if (strippedCommand.split(' ')[1] === 'add') {
             const user = message.guild.member(message.author);
+            const gameName = strippedCommand.split(' ')[2].toLowerCase();
 
             if (user.hasPermission('ADMINISTRATOR')) {
                 message.guild.roles.create({
@@ -47,7 +48,7 @@ client.on('message', (message) => {
                     }
                 }).then(() => {
                     const everyoneRole = message.guild.roles.cache.find(role => role.name === 'everyone');
-                    const role = message.guild.roles.cache.find(role => role.name === strippedCommand.split(' ')[2].toLowerCase());
+                    const role = message.guild.roles.cache.find(role => role.name === gameName);
                     message.guild.channels.create(strippedCommand.split(' ')[2].toLowerCase(), {
                         type: 'voice',
                         parent: '757603920850845797',
@@ -75,7 +76,7 @@ client.on('message', (message) => {
                         console.log('voice channel created')
                     });
 
-                    message.guild.channels.create(strippedCommand.split(' ')[2].toLowerCase(), {
+                    message.guild.channels.create(gameName, {
                         type: 'text',
                         parent: '757603920850845797',
                         permissionOverwrites: [
@@ -102,14 +103,15 @@ client.on('message', (message) => {
                     console.log(err)
                 });
 
-                message.reply(`@everyone New game role: ${strippedCommand.split(' ')[2].toLowerCase()} was added to the server!`)   
+                message.reply(`@everyone New game role: ${gameName} was added to the server!`)   
             } else {
                 message.reply('You don\'t have the permission to create new game roles! Contact the mods.')
             }
         } else if (strippedCommand.split(' ')[1] === 'remove') {
             const user = message.guild.member(message.author);
-            const voiceChannel = message.guild.channels.cache.find(channel => channel.name === strippedCommand.split(' ')[2].toLowerCase() && channel.type === 'voice');
-            const textChannel = message.guild.channels.cache.find(channel => channel.name === strippedCommand.split(' ')[2].toLowerCase() && channel.type === 'text');
+            const gameName = strippedCommand.split(' ')[2].toLowerCase();
+            const voiceChannel = message.guild.channels.cache.find(channel => channel.name === gameName && channel.type === 'voice');
+            const textChannel = message.guild.channels.cache.find(channel => channel.name === gameName && channel.type === 'text');
             if (user.hasPermission('ADMINISTRATOR')) {
                 const roleName = strippedCommand.split(' ')[2].toLowerCase();
                 const roleToDelete = message.guild.roles.cache.find(role => role.name === roleName);
